@@ -15,9 +15,7 @@ def download_git_repo(repo_url, target_dir, version):
     else:
         print(colored("téléchargement KO\n", "red"))
     
-    subprocess.run(['pushd', target_dir])
-    result = subprocess.run(['git', 'reset', '--hard', version])
-    subprocess.run(['popd'])
+    result = subprocess.run(['git', 'reset', '--hard', version], cwd=target_dir)
     
     if result.returncode == 0: 
         print(colored("branchement de version OK\n", "green"))
