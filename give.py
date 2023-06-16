@@ -7,12 +7,24 @@ from termcolor import colored
 def download_git_repo(repo_url, target_dir, version):
     # Utilisez la commande 'git clone' pour télécharger le dépôt Git dans le répertoire cible
     print(f"[GIVE] : téléchargement de la dépendance {repo_url}:{version} dans le répertoire {target_dir}\n")
+    
     result = subprocess.run(['git', 'clone', repo_url, target_dir])
     
     if result.returncode == 0: 
-        print(colored("résultat OK\n", "green"))
+        print(colored("téléchargement OK\n", "green"))
     else:
-        print(colored("résultat KO\n", "red"))
+        print(colored("téléchargement KO\n", "red"))
+    
+    subprocess.run(['pushd', target_dir])
+    result = subprocess.run(['git', 'reset', '--hard', version])
+    subprocess.run(['popd'])
+    
+    if result.returncode == 0: 
+        print(colored("branchement de version OK\n", "green"))
+    else:
+        print(colored("branchement de version KO\n", "red"))
+
+
 
 def download_git_repos_from_file(file_path, target_dir):
     with open(file_path, 'r') as file:
