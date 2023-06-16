@@ -1,0 +1,8 @@
+- name: n
+  url: https://github.com/bmathieugit/n
+  version: main
+
+- name: sitl
+  url: https://github.com/bmathieugit/sitl
+  version: main
+
